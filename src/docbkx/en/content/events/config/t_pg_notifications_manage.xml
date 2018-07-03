@@ -217,7 +217,29 @@
                 <mediaobject>
                     <imageobject>
                         <imagedata width="80%"
-                            fileref="resources/images/program/program_notification_ui.png"
+                            fileref="resources/images/program/what_to_send.png"
+                            format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </screenshot>
+        </para>
+        <para>
+            <screenshot>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata width="80%"
+                            fileref="resources/images/program/where_to_send.png"
+                            format="PNG"/>
+                    </imageobject>
+                </mediaobject>
+            </screenshot>
+        </para>
+        <para>
+            <screenshot>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata width="80%"
+                            fileref="resources/images/program/who_to_send.png"
                             format="PNG"/>
                     </imageobject>
                 </mediaobject>
