@@ -2610,6 +2610,19 @@ kafka.max-poll-records = 1000</screen></para>
     <para>The favorite status will appear as a boolean <emphasis>favorite</emphasis> field on the
       object (e.g. the dashboard) in the metadata response.</para>
   </section>
+  <section xml:id="webapi_subscription">
+    <title>Subscriptions</title>
+    <para>A logged user can subscribe to certain types of objects. Currently subscribable objects are
+     those of type Chart, EventChart, EventReport, Map and ReportTable.</para>
+    <para>To get the subscribers of an object (return an array of user IDs) you can make a <emphasis>GET</emphasis> request:
+    <screen>/api/30/&lt;object-type>/&lt;object-id>/subscribers</screen></para>
+    <para>See example as follows:<screen>/api/30/charts/DkPKc1EUmC2/subscribers</screen></para>
+    <para>To check whether the current user is subscribed to an object (returns a boolean) you can perform a <emphasis>GET</emphasis> call:
+    <screen>/api/30/&lt;object-type>/&lt;object-id>/subscribed</screen></para>
+    <para>See example as follows:<screen>/api/30/charts/DkPKc1EUmC2/subscribed</screen></para>
+    <para>To subscribe/de-subscribe to an object you perform a <emphasis>POST/DELETE</emphasis> request (no content type required):
+    <screen>/api/30/&lt;object-type>/&lt;object-id>/subscriber</screen></para>
+  </section>
   <section xml:id="webapi_file_resources">
     <title>File resources</title>
     <para><emphasis role="italic">File resources</emphasis> are objects used to represent and store
