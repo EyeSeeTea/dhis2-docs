@@ -1389,6 +1389,14 @@ http://server/api/26/constants/ID</screen></para>
               are moving metadata between 2 non-synced instances, it might make sense to set this to
               EXCLUDE to ease the handling of these generated objects.</entry>
           </row>
+          <row>
+            <entry>skipSharing</entry>
+            <entry>false/true</entry>
+            <entry>Enabling this will strip the sharing properties from the exported objects. This
+              includes <emphasis>user</emphasis>, <emphasis>publicAccess</emphasis>,
+                <emphasis>userGroupAccesses</emphasis>, <emphasis>userAccesses</emphasis>, and
+                <emphasis>externalAccess</emphasis>.</entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -16416,5 +16424,27 @@ qPEdI1xn7k0,COMPLETED,&lt;pid>,&lt;psid>,&lt;enrollment-id>,&lt;ou>,2016-01-01,2
       this:<screen>curl &quot;localhost:8080/api/synchronization/metadataPull&quot; -X POST
   -d &quot;https://dhis2.org/metadata-repo/221/trainingland-org-units/metadata.json&quot;
   -H &quot;Content-Type:text/plain&quot; -u admin:district -v</screen></para>
+  </section>
+  <section xml:id="webapi_icons">
+    <title>Icons</title>
+    <para>DHIS2 includes a collection of icons that can be used to give visual context to metadata.
+      These icons can be accessed through the icons resource.<screen>GET /api/icons</screen></para>
+    <para>This endpoint returns a list of information about the available icons. Eeach entry
+      contains information about the icon, and a reference to the actual
+      icon.<screen>{
+  key: "mosquito_outline",
+  description: "",
+  keywords: [
+    "malaria",
+    "mosquito",
+    "denge"
+  ],
+  href: "&lt;dhis server>/api/icons/mosquito_outline/icon.svg"
+}</screen></para>
+    <para>The keywords can be used to filter which icons to return. Passing a list of keywords with
+      the request will only return icons that match all the
+      keywords:<screen>GET /api/icons?keywords=shape,small</screen></para>
+    <para>A list of  all unique keywords can be found at the keywords
+      resource:<screen>GET /api/icons/keywords</screen></para>
   </section>
 </chapter>
