@@ -6232,20 +6232,20 @@ FTRrcoaog83,201401,DiszpKrYNg8,bRowv6yZOF2,bRowv6yZOF2,12,system,2014-03-02T21:4
     <para>For resources related to data analysis in DHIS 2, such as pivot tables, charts, maps,
       event reports and event charts, you can write and share data interpretations. An
       interpretation can be a comment, question, observation or interpretation about a data report
-      or visualization.<screen>/api/26/interpretations</screen></para>
+      or visualization.<screen>/api/30/interpretations</screen></para>
     <section xml:id="webapi_reading_interpretations">
       <title>Reading interpretations</title>
       <para>To read interpretations we will interact with the <emphasis role="italic"
-          >/api/26/interpretations</emphasis> resource. A typical GET request using field filtering
+          >/api/30/interpretations</emphasis> resource. A typical GET request using field filtering
         can look like
-        this:<screen>GET /api/26/interpretations?fields=*,comments[id,text,user]</screen></para>
+        this:<screen>GET /api/30/interpretations?fields=*,comments[id,text,user,mentions]</screen></para>
       <para>The output in JSON response format could look like below (additional fields omitted for
         brevity):</para>
       <screen>{
     &quot;interpretations&quot;: [{
         &quot;id&quot;: &quot;XSHiFlHAhhh&quot;,
         &quot;created&quot;: &quot;2013-05-30T10:24:06.181+0000&quot;,
-        "text": "Data looks suspicious, could be a data entry mistake.",
+        "text": "<p>Data looks suspicious, could be a data entry mistake.</p>",
         &quot;type&quot;: &quot;REPORT_TABLE&quot;,
         "likes": 2,
         "user": {
@@ -6257,7 +6257,7 @@ FTRrcoaog83,201401,DiszpKrYNg8,bRowv6yZOF2,bRowv6yZOF2,12,system,2014-03-02T21:4
     }, {
         &quot;id&quot;: &quot;kr4AnZmYL43&quot;,
         &quot;created&quot;: &quot;2013-05-29T14:47:13.081+0000&quot;,
-        "text": "Delivery rates in Bo looks high.",
+        "text": "<p>Delivery rates in Bo looks high.</p>",
         &quot;type&quot;: &quot;CHART&quot;,
         "likes": 3,
         "user": {
@@ -6266,17 +6266,35 @@ FTRrcoaog83,201401,DiszpKrYNg8,bRowv6yZOF2,bRowv6yZOF2,12,system,2014-03-02T21:4
         "chart": {
           "id": "HDEDqV3yv3H"
         },
+        mentions: [
+        {
+          "created": "2018-06-25T10:25:54.498",
+          "username": "boateng"
+        }
+        ],
         &quot;comments&quot;: [{
             "id": "iB4Etq8yTE6",
-            "text": "This report indicates a surge",
+            "text": "<p>This report indicates a surge</p>",
             "user": {
                 "id": "B4XIfwOcGyI"
             }, {
             "id": "iB4Etq8yTE6",
-            "text": "Likely caused by heavy rainfall",
+            "text": "<p>Likely caused by heavy rainfall</p>",
             "user": {
                 "id": "B4XIfwOcGyI"
+            },
+            {
+            "id": "SIjkdENan8p",
+            "text": "<p>have a look at this @boateng</p>",
+            "user": {
+              "id": "xE7jOejl9FI"
+            },
+            "mentions": [{
+              "created": "2018-06-25T10:03:52.316",
+              "username": "boateng"
             }]
+            }
+          }]
         }
     }]
 }</screen>
@@ -6338,6 +6356,10 @@ FTRrcoaog83,201401,DiszpKrYNg8,bRowv6yZOF2,bRowv6yZOF2,12,system,2014-03-02T21:4
               <entry>Array of comments for the interpretation. The text field holds the actual
                 comment.</entry>
             </row>
+            <row>
+              <entry>mentions</entry>
+              <entry>Array of mentions for the interpretation. A list of users identifiers.</entry>
+            </row>
           </tbody>
         </tgroup>
       </table>
@@ -6345,7 +6367,16 @@ FTRrcoaog83,201401,DiszpKrYNg8,bRowv6yZOF2,bRowv6yZOF2,12,system,2014-03-02T21:4
         the URL to retrieve the data associated with the resource (as apposed to the metadata). As
         an example, by following the map link and appending /data one can retrieve a PNG (image)
         representation of the thematic map through the following URL:</para>
-      <screen>https://play.dhis2.org/demo/api/26/maps/bhmHJ4ZCdCd/data</screen>
+      <screen>https://play.dhis2.org/demo/api/30/maps/bhmHJ4ZCdCd/data</screen>
+      <para>For all analytical objects you can filter by <emphasis role="italic">mentions</emphasis>.
+      To retrieve all the interpretations/comments where a user has been mentioned you have three options.
+      You can filter by the interpretation mentions (mentions in the interpretation description):
+      <screen>GET /api/30/interpretations?fields=*,comments[*]&amp;filter=mentions.username:in:[boateng]</screen>
+      You can filter by the interpretation comments mentions (mentions in any comment):
+      <screen>GET /api/30/interpretations?fields=*,comments[*]&amp;filter=comments.mentions.username:in:[boateng]</screen>
+      or you can filter by intepretations which contains the mentions either in the interpretation or in any comment (OR junction):
+      <screen>GET /api/30/interpretations?fields=*,comments[*]&amp;filter=mentions:in:[boateng]</screen>
+      </para>
     </section>
     <section xml:id="webapi_writing_interpretations">
       <title>Writing interpretations</title>
