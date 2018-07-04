@@ -110,22 +110,6 @@
         </orderedlist>
     </section>
     <section>
-        <title>Set as favorite</title>
-        <orderedlist>
-            <listitem>
-                <para>Open a favorite.</para>
-            </listitem>
-            <listitem>
-                <para>
-                    Click <emphasis role="bold">>>></emphasis> in the top right of the workspace.
-                </para>
-            </listitem>
-            <listitem>
-                <para>Click on the upper-right star icon to set as favorite.</para>
-            </listitem>
-        </orderedlist>
-    </section>
-    <section>
         <title>Subscribe to a favorite</title>
         <para>
             When you are subscribed to a favorite, you receive internal messages whenever
